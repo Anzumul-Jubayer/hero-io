@@ -4,13 +4,19 @@ import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home";
 import Apps from "../Pages/Apps";
 import Installation from "../Pages/Installation";
-const Route = createBrowserRouter([
+import Errorpage from "../Pages/Errorpage";
+const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement:<Errorpage/>,
     children: [
       {
-        path: "/home",
+        index:true,
+        Component: Home,
+      },
+      {
+       path:'/home',
         Component: Home,
       },
       {
@@ -21,8 +27,13 @@ const Route = createBrowserRouter([
         path: "/installation",
         Component: Installation,
       },
+      {
+        path: "*",
+        Component: Errorpage,
+      },
+     
     ],
   },
 ]);
 
-export default Route;
+export default router;

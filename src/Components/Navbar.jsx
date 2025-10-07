@@ -1,8 +1,9 @@
 import React from "react";
-
+import { Link, NavLink } from "react-router";
+import logo from "../assets/logo.png";
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-100 shadow-sm lg:px-14">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -27,51 +28,64 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Item 1</a>
+              {" "}
+              <Link to={"/home"}>Home</Link>
             </li>
             <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
+              {" "}
+              <Link to={"/apps"}>Apps</Link>
             </li>
             <li>
-              <a>Item 3</a>
+              {" "}
+              <Link to={"/installation"}>Installation</Link>
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Hero.io</a>
+        <div className="flex items-center gap-1 lg:gap-4">
+          <img src={logo} alt="" className="w-10 lg:w-12" />
+          <Link
+            to={"/home"}
+            className=" font-bold text-xl lg:text-3xl text-[#632ee3]"
+          >
+            Hero.io
+          </Link>
+        </div>
+        <a></a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 font-semibold">
           <li>
-            <a>Item 1</a>
+            <NavLink to="/home">
+              {({ isActive }) => (
+                <span className={isActive ? "border-b-2 border-[#632ee3] text-[#632ee3] " : ""}>Home</span>
+              )}
+            </NavLink>
           </li>
           <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
+            <NavLink to="/apps">
+              {({ isActive }) => (
+                <span className={isActive ? "border-b-2 border-[#632ee3] text-[#632ee3] " : ""}>Apps</span>
+              )}
+            </NavLink>
           </li>
           <li>
-            <a>Item 3</a>
+            <NavLink to="/installation">
+              {({ isActive }) => (
+                <span className={isActive ? "border-b-2 border-[#632ee3] text-[#632ee3] " : ""}>Installation</span>
+              )}
+            </NavLink>
           </li>
+          
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <a
+          href="https://github.com/Anzumul-Jubayer"
+          className="btn text-white bg-linear-to-r from-[#632ee3] to-[#9f62f2]"
+          target="/"
+        >
+          <i class="fa-brands fa-github"></i> Contribution
+        </a>
       </div>
     </div>
   );
