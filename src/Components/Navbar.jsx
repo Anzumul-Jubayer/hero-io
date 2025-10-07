@@ -84,7 +84,7 @@ const Navbar = () => {
           className="btn text-white bg-linear-to-r from-[#632ee3] to-[#9f62f2]"
           target="/"
         >
-          <i class="fa-brands fa-github"></i> Contribution
+          <i className="fa-brands fa-github"></i> Contribution
         </a>
       </div>
     </div>
