@@ -12,6 +12,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { saveAppData } from "../Utils/localStorage";
 const AppDetails = () => {
   const { id } = useParams();
   const { apps, loading } = useAppData();
@@ -31,6 +32,11 @@ const AppDetails = () => {
     size,
     ratings,
   } = app;
+
+const handleInstall=()=>{
+saveAppData(app)
+}
+
 
   return (
     <div>
@@ -76,7 +82,7 @@ const AppDetails = () => {
                   <h1 className="font-bold text-center text-2xl">{reviews}K</h1>
                 </div>
               </div>
-              <button className="btn lg:w-1/3 mt-4 bg-[#00d390] text-white">
+              <button onClick={handleInstall} className="btn lg:w-1/3 mt-4 bg-[#00d390] text-white">
                 Install Now ({size}) MB
               </button>
             </div>
@@ -90,8 +96,7 @@ const AppDetails = () => {
         <div className="bg-base-100 h-80 p-8 rounded-sm">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
-              width={500}
-              height={300}
+              
               data={ratings}
               layout="vertical"
               margin={{
@@ -102,7 +107,7 @@ const AppDetails = () => {
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="name" />
+              <XAxis type="number" />
               <YAxis
               type="category"
               dataKey="name"
@@ -114,7 +119,7 @@ const AppDetails = () => {
               <Bar
                 dataKey="count"
                 fill="#ff8811"
-                
+                barSize={30}
                 activeBar={<Rectangle fill="gold" stroke="purple" />}
               />
             </BarChart>
