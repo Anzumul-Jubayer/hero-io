@@ -41,7 +41,7 @@ const Apps = () => {
         </label>
       </div>
       <div>
-        {searchedApps.length===0?(<AppNotFound/>): ""}
+        {search && searchedApps.length===0?(<AppNotFound/>): ""}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-2 md:px-5 lg:px-20">
         {searchedApps.map((app) => (
