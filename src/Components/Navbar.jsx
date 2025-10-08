@@ -57,35 +57,58 @@ const Navbar = () => {
           <li>
             <NavLink to="/home">
               {({ isActive }) => (
-                <span className={isActive ? "border-b-2 border-[#632ee3] text-[#632ee3] " : ""}>Home</span>
+                <span
+                  className={
+                    isActive
+                      ? "border-b-2 border-[#632ee3] text-[#632ee3] "
+                      : ""
+                  }
+                >
+                  Home
+                </span>
               )}
             </NavLink>
           </li>
           <li>
             <NavLink to="/apps">
               {({ isActive }) => (
-                <span className={isActive ? "border-b-2 border-[#632ee3] text-[#632ee3] " : ""}>Apps</span>
+                <span
+                  className={
+                    isActive
+                      ? "border-b-2 border-[#632ee3] text-[#632ee3] "
+                      : ""
+                  }
+                >
+                  Apps
+                </span>
               )}
             </NavLink>
           </li>
           <li>
             <NavLink to="/installation">
               {({ isActive }) => (
-                <span className={isActive ? "border-b-2 border-[#632ee3] text-[#632ee3] " : ""}>Installation</span>
+                <span
+                  className={
+                    isActive
+                      ? "border-b-2 border-[#632ee3] text-[#632ee3] "
+                      : ""
+                  }
+                >
+                  Installation
+                </span>
               )}
             </NavLink>
           </li>
-          
         </ul>
       </div>
       <div className="navbar-end">
-        <a
-          href="https://github.com/Anzumul-Jubayer"
+        <Link
+          to="https://github.com/Anzumul-Jubayer"
           className="btn text-white bg-linear-to-r from-[#632ee3] to-[#9f62f2]"
           target="/"
         >
           <i className="fa-brands fa-github"></i> Contribution
-        </a>
+        </Link>
       </div>
     </div>
   );
