@@ -1,26 +1,28 @@
 import React, { useState } from "react";
 import useAppData from "../Hook/useAppData";
 import AppCards from "../Components/AppCards";
-import AppNotFound from "../Components/AppNotFound";
 import Skeleton from "../Components/Skeleton";
+import NotFound from "../Components/NotFound";
 
 const Apps = () => {
-  const { apps,loading } = useAppData();
-  const [search,setSearch]=useState('')
-  const [searchLoading,setSerchLoading]=useState(false)
-  const term =search.trim().toLocaleLowerCase()
-  const handleSearch=(e)=>{
-    const value=e.target.value
-    setSearch(value)
-    setSerchLoading(true)
-    
+  const { apps, loading } = useAppData();
+  const [search, setSearch] = useState("");
+  const [searchLoading, setSerchLoading] = useState(false);
+  const term = search.trim().toLocaleLowerCase();
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+    setSerchLoading(true);
+
     setTimeout(() => {
-    setSerchLoading(false)
-  },500);
-  }
-  
-  const searchedApps=term?apps.filter(app=>app.title.toLocaleLowerCase().includes(term)):apps
-  
+      setSerchLoading(false);
+    }, 500);
+  };
+
+  const searchedApps = term
+    ? apps.filter((app) => app.title.toLocaleLowerCase().includes(term))
+    : apps;
+
   return (
     <div>
       <h1 className="font-bold text-4xl text-center mt-12">
@@ -30,7 +32,6 @@ const Apps = () => {
         Explore All Apps on the Market developed by us. We code for Millions
       </p>
       <div className="flex flex-col lg:flex-row justify-between items-center mx-4 lg:mx-0 lg:px-20 my-10 gap-4 lg:gap-0">
-       
         <p className="font-bold text-2xl">({searchedApps.length}) Apps Found</p>
         <label className="input">
           <svg
@@ -49,20 +50,28 @@ const Apps = () => {
               <path d="m21 21-4.3-4.3"></path>
             </g>
           </svg>
-          <input onChange={handleSearch} type="search" value={search} required placeholder="Search Apps" />
+          <input
+            onChange={handleSearch}
+            type="search"
+            value={search}
+            required
+            placeholder="Search Apps"
+          />
         </label>
       </div>
       <div>
-        {search && searchedApps.length===0?(<AppNotFound/>): ""}
+        {search && searchedApps.length === 0 ? <NotFound></NotFound> : ""}
       </div>
-      
-      {
-        loading||searchLoading?<Skeleton Count={20}></Skeleton>:<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-2 md:px-5 lg:px-20">
-        {searchedApps.map((app) => (
-          <AppCards key={app.id} app={app}></AppCards>
-        ))}
-      </div>
-      }
+
+      {loading || searchLoading ? (
+        <Skeleton Count={20}></Skeleton>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-2 md:px-5 lg:px-20">
+          {searchedApps.map((app) => (
+            <AppCards key={app.id} app={app}></AppCards>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

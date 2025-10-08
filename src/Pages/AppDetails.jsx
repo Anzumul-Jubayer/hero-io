@@ -13,12 +13,13 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { saveAppData } from "../Utils/localStorage";
+import LoadingSpinner from "../Components/LoadingSpinner";
+import AppNotFound from "../Components/AppNotFound";
 const AppDetails = () => {
   const { id } = useParams();
   const { apps, loading } = useAppData();
-  const app = apps.find((el) => el.id === parseInt(id));
   const [install, setInstall] = useState(false);
-  
+  const app = apps.find((el) => el.id === parseInt(id));
   useEffect(() => {
     if (!app) return; 
     const existingList = JSON.parse(localStorage.getItem("installed") || "[]");
@@ -27,8 +28,15 @@ const AppDetails = () => {
   }, [app]);
  
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner></LoadingSpinner>
   }
+  if(!app){
+    return <AppNotFound></AppNotFound>
+  }
+   const handleInstall = () => {
+    saveAppData(app);
+    setInstall(true)
+  };
   const {
     image,
     title,
@@ -40,13 +48,6 @@ const AppDetails = () => {
     size,
     ratings,
   } = app;
-
-
-
-  const handleInstall = () => {
-    saveAppData(app);
-    setInstall(true)
-  };
 
   return (
     <div>
