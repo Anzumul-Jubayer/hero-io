@@ -7,7 +7,18 @@ import Skeleton from "../Components/Skeleton";
 const Apps = () => {
   const { apps,loading } = useAppData();
   const [search,setSearch]=useState('')
+  const [searchLoading,setSerchLoading]=useState(false)
   const term =search.trim().toLocaleLowerCase()
+  const handleSearch=(e)=>{
+    const value=e.target.value
+    setSearch(value)
+    setSerchLoading(true)
+    
+    setTimeout(() => {
+    setSerchLoading(false)
+  },500);
+  }
+  
   const searchedApps=term?apps.filter(app=>app.title.toLocaleLowerCase().includes(term)):apps
   
   return (
@@ -38,7 +49,7 @@ const Apps = () => {
               <path d="m21 21-4.3-4.3"></path>
             </g>
           </svg>
-          <input onChange={(e)=>setSearch(e.target.value)} type="search" value={search} required placeholder="Search Apps" />
+          <input onChange={handleSearch} type="search" value={search} required placeholder="Search Apps" />
         </label>
       </div>
       <div>
@@ -46,7 +57,7 @@ const Apps = () => {
       </div>
       
       {
-        loading?<Skeleton Count={20}></Skeleton>:<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-2 md:px-5 lg:px-20">
+        loading||searchLoading?<Skeleton Count={20}></Skeleton>:<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-2 md:px-5 lg:px-20">
         {searchedApps.map((app) => (
           <AppCards key={app.id} app={app}></AppCards>
         ))}
