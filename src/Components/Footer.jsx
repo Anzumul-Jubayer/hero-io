@@ -1,16 +1,17 @@
 import React from "react";
-
+import logoImg from "../assets/logo.png";
 const Footer = () => {
   return (
     <footer className="footer footer-horizontal footer-center bg-[#001931] text-primary-content p-14 space-y-4">
       <aside>
-        
-        <p className="font-bold text-xl ">
-          <span className="text-3xl">Hero.io Tech</span>
-          <br />
+        <img src={logoImg} alt="" className="w-30" />
+        <h1 className="text-3xl font-bold">Hero.io Tech</h1>
+        <p className="font-semibold text-xl ">
           We provide best IT solution since 2020
         </p>
-        <p>Copyright © {new Date().getFullYear()} - All right reserved-Hero.io</p>
+        <p>
+          Copyright © {new Date().getFullYear()} - All right reserved-Hero.io
+        </p>
       </aside>
       <nav>
         <div className="grid grid-flow-col gap-4">
