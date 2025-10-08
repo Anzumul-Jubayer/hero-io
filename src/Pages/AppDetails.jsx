@@ -1,7 +1,17 @@
 import React from "react";
 import { useParams } from "react-router";
 import useAppData from "../Hook/useAppData";
-
+import {
+  BarChart,
+  Bar,
+  Rectangle,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 const AppDetails = () => {
   const { id } = useParams();
   const { apps, loading } = useAppData();
@@ -19,7 +29,7 @@ const AppDetails = () => {
     downloads,
     companyName,
     size,
-    ratings
+    ratings,
   } = app;
 
   return (
@@ -63,22 +73,61 @@ const AppDetails = () => {
                     <i className="fa-solid fa-thumbs-up"></i>
                   </p>
                   <p className=" text-gray-400 text-center">Total Reviews</p>
-                  <h1 className="font-bold text-center text-2xl">
-                    {reviews}K
-                  </h1>
+                  <h1 className="font-bold text-center text-2xl">{reviews}K</h1>
                 </div>
               </div>
-              <button className="btn lg:w-1/3 mt-4 bg-[#00d390] text-white">Install Now ({size}) MB</button>
+              <button className="btn lg:w-1/3 mt-4 bg-[#00d390] text-white">
+                Install Now ({size}) MB
+              </button>
             </div>
           </div>
-           
         </div>
         <div className="divider divider-end mx-2 md:mx-10 lg:mx-20"></div>
       </div>
+      {/* Chart */}
+      <div className="space-y-3 mx-2 md:mx-10 lg:mx-20">
+        <h1 className="text-xl font-semibold ">Ratings</h1>
+        <div className="bg-base-100 h-80 p-8 rounded-sm">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              width={500}
+              height={300}
+              data={ratings}
+              layout="vertical"
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="name" />
+              <YAxis
+              type="category"
+              dataKey="name"
+              reversed={true}
+              />
+              <Tooltip />
+              <Legend />
+
+              <Bar
+                dataKey="count"
+                fill="#ff8811"
+                
+                activeBar={<Rectangle fill="gold" stroke="purple" />}
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+      <div className="divider divider-end mx-2 md:mx-10 lg:mx-20"></div>
       {/* description */}
       <div className="mx-2 md:mx-10 lg:mx-20">
+        <h1 className="font-bold my-6">Description</h1>
         <p className="text-justify text-gray-400">{description}</p>
       </div>
+      
     </div>
   );
 };
