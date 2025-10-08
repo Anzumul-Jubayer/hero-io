@@ -18,7 +18,9 @@ const Home = () => {
                         trendingApps.map(app=><AppCards key={app.id} app={app}></AppCards>)
                     }
                 </div>
-                <Link to={'/apps'}>Show All</Link>
+                <div className='flex justify-center my-10'>
+                    <Link to={'/apps'} className="btn text-white bg-linear-to-r from-[#632ee3] to-[#9f62f2] px-8">Show All</Link>
+                </div>
             </div>
         </div>
     );
