@@ -10,7 +10,9 @@ const Installation = () => {
       setInstalled(saveList);
     }
   }, []);
-
+ if(installed.length===0){
+    return <h1 className="text-4xl font-semibold text-center">Opps!No App Here!</h1>
+ }
   const sortItem=()=>{
     if(sortOrder==="asc"){
         return [...installed].sort((a,b)=>a.downloads-b.downloads)

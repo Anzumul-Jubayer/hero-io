@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import useAppData from "../Hook/useAppData";
 import AppCards from "../Components/AppCards";
 import AppNotFound from "../Components/AppNotFound";
+import Skeleton from "../Components/Skeleton";
 
 const Apps = () => {
-  const { apps } = useAppData();
+  const { apps,loading } = useAppData();
   const [search,setSearch]=useState('')
   const term =search.trim().toLocaleLowerCase()
   const searchedApps=term?apps.filter(app=>app.title.toLocaleLowerCase().includes(term)):apps
@@ -43,11 +44,14 @@ const Apps = () => {
       <div>
         {search && searchedApps.length===0?(<AppNotFound/>): ""}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-2 md:px-5 lg:px-20">
+      
+      {
+        loading?<Skeleton Count={20}></Skeleton>:<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-2 md:px-5 lg:px-20">
         {searchedApps.map((app) => (
           <AppCards key={app.id} app={app}></AppCards>
         ))}
       </div>
+      }
     </div>
   );
 };
