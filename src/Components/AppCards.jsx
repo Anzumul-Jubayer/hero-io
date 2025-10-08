@@ -5,7 +5,7 @@ const AppCards = ({ app }) => {
  
   return (
     <div>
-      <div className="card bg-base-100  shadow-sm">
+      <div className="card bg-base-100  shadow-sm hover:scale-102 transition ease-in-out">
         <figure className=" bg-gray-100 m-6 p-8 rounded-lg">
           <img
             src={image}
