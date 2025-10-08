@@ -2,12 +2,23 @@ import React, { useEffect, useState } from "react";
 
 const Installation = () => {
   const [installed, setInstalled] = useState([]);
+  const [sortOrder, setSortOrder] = useState("none");
   useEffect(() => {
     const saveList = JSON.parse(localStorage.getItem("installed"));
     if (saveList) {
       setInstalled(saveList);
     }
   }, []);
+
+  const sortItem=()=>{
+    if(sortOrder==="asc"){
+        return [...installed].sort((a,b)=>a.downloads-b.downloads)
+    }else if(sortOrder==="desc"){
+        return [...installed].sort((a,b)=>b.downloads-a.downloads)
+    }else{
+       return installed 
+    }
+  }
   return (
     <div>
       <h1 className="font-bold text-4xl text-center mt-12">
@@ -20,14 +31,25 @@ const Installation = () => {
         <p className="font-bold text-2xl">
           ({installed.length}) Apps Installed
         </p>
-        <button>Sort</button>
+        <label className="form-control w-full max-w-xs">
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            className="select select-bordered"
+          >
+            <option value="none">Sort By Download</option>
+            <option value="asc">Low -&gt;High</option>
+            <option value="desc">High -&gt;Low</option>
+          </select>
+        </label>
       </div>
       <div className="space-y-3">
-        {installed.map((el) => (
-          <div className="card flex flex-col lg:flex-row card-side bg-base-100 shadow-sm mx-2 lg:mx-30 p-4">
-            <div>
-                
-            </div>
+        {sortItem().map((el) => (
+          <div
+            key={el.id}
+            className="card flex flex-col lg:flex-row card-side bg-base-100 shadow-sm mx-2 lg:mx-30 p-4"
+          >
+            <div></div>
             <figure>
               <img
                 src={el.image}
@@ -49,16 +71,13 @@ const Installation = () => {
                   </p>
                 </div>
                 <div className=" text-gray-400">
-                  <p>
-                     {el.size} MB
-                  </p>
+                  <p>{el.size} MB</p>
                 </div>
               </div>
-              
             </div>
             <div className="flex   justify-end items-center">
-                <button className="btn bg-[#00d390] text-white">Uninstall</button>
-              </div>
+              <button className="btn bg-[#00d390] text-white">Uninstall</button>
+            </div>
           </div>
         ))}
       </div>
@@ -67,3 +86,4 @@ const Installation = () => {
 };
 
 export default Installation;
+
