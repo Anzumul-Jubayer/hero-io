@@ -50,7 +50,7 @@ const AppDetails = () => {
 
   return (
     <div>
-      <div className="">
+      <div>
         <div className="card bg-base-100 shadow-sm mx-2 md:mx-10 lg:mx-20">
           <div className="flex flex-col lg:flex-row items-center">
             <div>
