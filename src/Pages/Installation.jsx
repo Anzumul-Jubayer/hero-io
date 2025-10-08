@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const Installation = () => {
   const [installed, setInstalled] = useState([]);
@@ -18,6 +19,13 @@ const Installation = () => {
     }else{
        return installed 
     }
+  }
+  const handleUninstall=(id)=>{
+     const existingList=JSON.parse(localStorage.getItem('installed'))
+     let updateList=existingList.filter(el=>el.id !==id)
+     setInstalled(updateList)
+     localStorage.setItem('installed',JSON.stringify(updateList))
+     toast("UnInstall Successful!!!")
   }
   return (
     <div>
@@ -76,7 +84,7 @@ const Installation = () => {
               </div>
             </div>
             <div className="flex   justify-end items-center">
-              <button className="btn bg-[#00d390] text-white">Uninstall</button>
+              <button onClick={()=>handleUninstall(el.id)} className="btn bg-[#00d390] text-white">Uninstall</button>
             </div>
           </div>
         ))}
