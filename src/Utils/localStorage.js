@@ -1,10 +1,13 @@
+import { toast } from "react-toastify"
+
+
 export const saveAppData=(app)=>{
     const existingList=JSON.parse(localStorage.getItem('installed'))
  let updateList=[]
  if(existingList){
     const isDuplicate=existingList.some(el=>el.id===app.id)
     if(isDuplicate){
-        return alert("sorry ")
+        return 
     }
     updateList=[...existingList,app]
  }else{
@@ -12,5 +15,5 @@ export const saveAppData=(app)=>{
   
  }
  localStorage.setItem('installed',JSON.stringify(updateList))
- alert('installed')
+ toast('Successfully Installed')
 }
