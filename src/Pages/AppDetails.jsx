@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState } from "react";
 import { useParams } from "react-router";
 import useAppData from "../Hook/useAppData";
 import {
@@ -17,7 +17,7 @@ const AppDetails = () => {
   const { id } = useParams();
   const { apps, loading } = useAppData();
   const app = apps.find((el) => el.id === parseInt(id));
-
+  const [install, setInstall] = useState(false);
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -33,10 +33,12 @@ const AppDetails = () => {
     ratings,
   } = app;
 
-const handleInstall=()=>{
-saveAppData(app)
-}
 
+
+  const handleInstall = () => {
+    saveAppData(app);
+    setInstall(true)
+  };
 
   return (
     <div>
@@ -82,9 +84,14 @@ saveAppData(app)
                   <h1 className="font-bold text-center text-2xl">{reviews}K</h1>
                 </div>
               </div>
-              <button onClick={handleInstall} className="btn lg:w-1/3 mt-4 bg-[#00d390] text-white">
-                Install Now ({size}) MB
+              <button onClick={handleInstall} disabled={install} className="btn lg:w-1/3 mt-4 bg-[#00d390] text-white" style={{
+                backgroundColor: "#00d390",
+                opacity:1
+              }}>
+               {install?"Installed":`Install Now (${size}) MB`} 
               </button>
+ 
+
             </div>
           </div>
         </div>
@@ -96,7 +103,6 @@ saveAppData(app)
         <div className="bg-base-100 h-80 p-8 rounded-sm">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
-              
               data={ratings}
               layout="vertical"
               margin={{
@@ -108,11 +114,7 @@ saveAppData(app)
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" />
-              <YAxis
-              type="category"
-              dataKey="name"
-              reversed={true}
-              />
+              <YAxis type="category" dataKey="name" reversed={true} />
               <Tooltip />
               <Legend />
 
@@ -132,7 +134,6 @@ saveAppData(app)
         <h1 className="font-bold my-6">Description</h1>
         <p className="text-justify text-gray-400">{description}</p>
       </div>
-      
     </div>
   );
 };
