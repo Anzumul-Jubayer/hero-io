@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, {useEffect, useState } from "react";
 import { useParams } from "react-router";
 import useAppData from "../Hook/useAppData";
 import {
@@ -18,6 +18,14 @@ const AppDetails = () => {
   const { apps, loading } = useAppData();
   const app = apps.find((el) => el.id === parseInt(id));
   const [install, setInstall] = useState(false);
+  
+  useEffect(() => {
+    if (!app) return; 
+    const existingList = JSON.parse(localStorage.getItem("installed") || "[]");
+    const isDuplicate = existingList.some((el) => el.id === app.id);
+    setInstall(isDuplicate);
+  }, [app]);
+ 
   if (loading) {
     return <p>Loading...</p>;
   }
