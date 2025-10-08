@@ -15,5 +15,5 @@ export const saveAppData=(app)=>{
   
  }
  localStorage.setItem('installed',JSON.stringify(updateList))
- toast('Successfully Installed!!')
+ toast('✅Yahoo!! Installed Successfully !!')
 }

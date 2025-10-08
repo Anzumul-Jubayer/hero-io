@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import LoadingSpinner from "../Components/LoadingSpinner";
 
 const Installation = () => {
   const [installed, setInstalled] = useState([]);
   const [sortOrder, setSortOrder] = useState("none");
+  const [pageLoading,setPageLoading]=useState('true')
   useEffect(() => {
-    const saveList = JSON.parse(localStorage.getItem("installed"));
+    const timer=setTimeout(()=>{
+         const saveList = JSON.parse(localStorage.getItem("installed"));
     if (saveList) {
       setInstalled(saveList);
     }
+    setPageLoading(false)
+    },800)
+   return ()=>clearTimeout(timer)
   }, []);
+
+  if(pageLoading){
+    return <LoadingSpinner></LoadingSpinner>
+  }
  if(installed.length===0){
     return <h1 className="text-4xl font-semibold text-center">Opps!No App Here!</h1>
  }
@@ -29,6 +39,7 @@ const Installation = () => {
      localStorage.setItem('installed',JSON.stringify(updateList))
      toast("UnInstall Successful!!!")
   }
+  
   return (
     <div>
       <h1 className="font-bold text-4xl text-center mt-12">
@@ -53,6 +64,8 @@ const Installation = () => {
           </select>
         </label>
       </div>
+      <div className="divider divider-end mx-2 md:mx-10 lg:mx-20"></div>
+      
       <div className="space-y-3">
         {sortItem().map((el) => (
           <div
