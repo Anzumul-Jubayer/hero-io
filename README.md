@@ -9,8 +9,7 @@ Hero.io is a modern, fully responsive web application built with React and Tailw
 🔗 **Repository:** https://github.com/Anzumul-Jubayer/hero-io
 ---
 
-## 🖼️ Screenshot
-![Hero.io Screenshot](https://i.ibb.co.com/bRYqKdFq/hero-io-a-08-netlify-app.png)
+
 
 ---
 
